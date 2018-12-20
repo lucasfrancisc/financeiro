@@ -1,4 +1,6 @@
-package model.dao.jpa;
+package model.dao.database.jpa;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -32,5 +34,10 @@ public class FormaPagamentoDAO implements DAOFP {
 	public void delete(Long id) {
 		FormaPagamento f = this.read(id);
 		manager.remove(f);
+	}
+	
+	public List<FormaPagamento> get() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

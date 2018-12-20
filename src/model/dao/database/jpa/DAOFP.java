@@ -1,4 +1,4 @@
-package model.dao.jpa;
+package model.dao.database.jpa;
 
 import model.entity.FormaPagamento;
 

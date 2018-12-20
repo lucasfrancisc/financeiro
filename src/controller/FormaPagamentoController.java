@@ -8,8 +8,8 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import model.dao.jpa.FinanceiroEntityManagerFactory;
-import model.dao.jpa.FormaPagamentoDAO;
+import model.dao.database.jpa.FabricaEntityManagerFactory;
+import model.dao.database.jpa.FormaPagamentoDAO;
 import model.entity.FormaPagamento;
 import util.FuncoesUtil;
 import util.enumeration.Operacao;
@@ -23,7 +23,7 @@ public class FormaPagamentoController {
 	
 	public FormaPagamentoController(Result result) {
 		this.result = result;	
-		this.manager = FinanceiroEntityManagerFactory.getEntityManagerFactory().createEntityManager();
+		this.manager = FabricaEntityManagerFactory.getEntityManagerFactory().createEntityManager();
 		dao = new FormaPagamentoDAO(manager);		
 	}	
 	
@@ -35,7 +35,7 @@ public class FormaPagamentoController {
 	
 	@Get("/formaPagamento/listagem")
 	public void listagem() {
-		List<FormaPagamento> formas = model.dao.FormaPagamentoDAO.get(); 
+		List<FormaPagamento> formas = dao.get(); 
 		result.include("formas", formas);		
 	}
 	
@@ -44,7 +44,7 @@ public class FormaPagamentoController {
 		try {
 			FuncoesUtil.iniciaTransacao(manager);
 			
-			if (entity.getOperacao().equals(Operacao.CREATE)) {
+			if (entity.getOperacao().equals(Operacao.INCLUSAO)) {
 				dao.create(entity);
 				System.out.println("Forma de pagamento incluída com sucesso.");
 			} else {

@@ -16,11 +16,25 @@
 						<h2>Cadastro de Forma de Pagamento <span class="glyphicon glyphicon-credit-card"> </span> </h2>			  										
 					</div> <hr>
 					<ul class="nav nav-pills">
-					  <li role="presentation" class="active"><a href="/meufinanceiro/menu">Home <span class="glyphicon glyphicon-home" </span></a></li>
-					  <li role="presentation"><a href="/meufinanceiro/formaPagamento">Forma de pagamento <span class="glyphicon glyphicon-credit-card"</span> </a></li>
-					  <li role="presentation"><a href="/meufinanceiro/conta">Conta <span class="glyphicon glyphicon-usd"</span> </a></li>
-					  <li role="presentation"><a href="/meufinanceiro/calculadora">Calculadora <span class="glyphicon glyphicon-plus"</span> </a></li>
-					</ul> <br>						
+					  <li role="presentation" class="active">
+					  	<a href="/meufinanceiro/menu">
+						  	Home 
+						  	<span class="glyphicon glyphicon-home">
+						  	</span>
+					  	</a>
+					  </li>
+					<li role="presentation"><a
+						href="/meufinanceiro/formaPagamento">Forma de pagamento 
+						<span class="glyphicon glyphicon-credit-card"></span>
+						</a>
+					</li>
+					<li role="presentation"><a href="/meufinanceiro/conta">Conta
+							<span class="glyphicon glyphicon-usd"></span>
+					</a></li>
+					<li role="presentation"><a href="/meufinanceiro/calculadora">Calculadora
+							<span class="glyphicon glyphicon-plus"></span>
+					</a></li>
+				</ul> <br>						
 		
 					<div class="panel-body">
 						<div class="row">
