@@ -1,11 +1,12 @@
 package model.dao.database.jpa;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import model.entity.CentroCusto;
-import java.util.List;
 
-public class CentroCustoDAO implements DAO {
+public class CentroCustoDAO implements DAOCentroCusto {
 
 	private final EntityManager manager;
 	
