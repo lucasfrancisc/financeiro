@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import model.entity.Pessoa;
 
-public class PessoaDAO implements GenericInterfaceDAO<Pessoa> {
+public class PessoaDAO extends GenericDAO<Pessoa> {
 
 	private final EntityManager manager;
 	

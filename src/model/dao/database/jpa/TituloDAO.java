@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import model.entity.Titulo;
 
-public class TituloDAO implements GenericInterfaceDAO<Titulo> {
+public class TituloDAO extends GenericDAO<Titulo> {
 
 	private final EntityManager manager;
 	

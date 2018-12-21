@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import model.entity.Conta;
 
-public class ContaDAO implements GenericInterfaceDAO<Conta> {
+public class ContaDAO extends GenericDAO<Conta> {
 	
 	private final EntityManager manager;
 	
