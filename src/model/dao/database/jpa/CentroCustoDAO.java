@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import model.entity.CentroCusto;
 
-public class CentroCustoDAO implements DAOCentroCusto {
+public class CentroCustoDAO implements GenericInterfaceDAO<CentroCusto> {
 
 	private final EntityManager manager;
 	

@@ -1,10 +1,12 @@
 package model.dao.database.jpa;
 
-import javax.persistence.EntityManager;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import model.entity.Conta;
 
-public class ContaDAO implements DAOConta {
+public class ContaDAO implements GenericInterfaceDAO<Conta> {
 	
 	private final EntityManager manager;
 	

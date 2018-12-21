@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import model.entity.FormaPagamento;
 
-public class FormaPagamentoDAO implements DAOFP {
+public class FormaPagamentoDAO implements GenericInterfaceDAO<FormaPagamento> {
 
 	private final EntityManager manager;
 	
