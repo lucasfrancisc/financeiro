@@ -9,23 +9,21 @@ import br.com.caelum.vraptor.Result;
 import model.dao.database.jdbc.DatabaseUtil;
 import model.dao.database.jpa.CentroCustoDAO;
 import model.dao.database.jpa.FabricaEntityManagerFactory;
+import model.dao.database.jpa.GenericDAO;
+import controller.GenericController;
 import model.entity.CentroCusto;
 
 @Resource
-public class CentroCustoController {
-	
-	private Result result;
-	private DatabaseUtil databaseUtil;
-	private final CentroCustoDAO dao;
-	private final EntityManager manager;
+public class CentroCustoController extends GenericController<CentroCusto> {
 	
 	public CentroCustoController(Result result) {
-		this.result = result;
-		databaseUtil = databaseUtil.getInstanciaUnica();
-		manager  = FabricaEntityManagerFactory.getUnicaInstancia().getEntityManagerFactory().createEntityManager();
-		dao = new CentroCustoDAO(manager);
+		super(result);
+		// TODO Auto-generated constructor stub
 	}
+
+	private Result result;
 	
+
 	public void add() {
 	}
 	
