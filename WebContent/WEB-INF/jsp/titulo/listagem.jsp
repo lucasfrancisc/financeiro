@@ -24,7 +24,7 @@
 					<tr>
 						<td>${t.id}</td>
 						<td>${t.descricao}</td>
-						<td><a href="exibir?descricao=${t.descricao}">Exibir</a></td>
+						<td><a href="exibir?id=${t.id}">Exibir</a></td>
 						<td><a href="excluir" class="btn-excluir btn btn-sm btn-danger" titulo-id="${t.descricao}">Excluir</a></td>
 					</tr>
 				</c:forEach>

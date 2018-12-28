@@ -8,10 +8,8 @@ import model.entity.CentroCusto;
 
 public class CentroCustoDAO extends GenericDAO<CentroCusto> {
 
-	private final EntityManager manager;
-	
 	public CentroCustoDAO(EntityManager manager) {
-		this.manager = manager;
+		super(manager);
 	}
 	
 	@Override
@@ -47,6 +45,12 @@ public class CentroCustoDAO extends GenericDAO<CentroCusto> {
 				.setParameter("pesquisa", "%" + pesquisa + "%")
 				.getResultList();
 		return dados;
+	}
+
+	@Override
+	protected String getSelectFind() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

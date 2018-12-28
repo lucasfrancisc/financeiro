@@ -8,10 +8,8 @@ import model.entity.Pessoa;
 
 public class PessoaDAO extends GenericDAO<Pessoa> {
 
-	private final EntityManager manager;
-	
 	public PessoaDAO(EntityManager manager) {
-		this.manager = manager;
+		super(manager);
 	}
 	
 	@Override
@@ -47,5 +45,11 @@ public class PessoaDAO extends GenericDAO<Pessoa> {
 				.setParameter("pesquisa", "%" + pesquisa + "%")
 				.getResultList();
 		return entitys;
+	}
+
+	@Override
+	protected String getSelectFind() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
