@@ -13,4 +13,8 @@ public class TituloDAO extends GenericDAO<Titulo> {
 	protected String getSelectFind() {
 		return "SELECT t FROM Titulo AS t WHERE UPPER(t.descricao) LIKE :pesquisa";
 	}
+	
+	public void teste() {
+		
+	}
 }
