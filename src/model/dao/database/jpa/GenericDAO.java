@@ -51,7 +51,7 @@ public abstract class GenericDAO <T extends Base> implements GenericInterfaceDAO
 		
 		List<T> entitys = manager
 				.createQuery(this.getSelectFind())
-				.setParameter("pesquisa", "%" + pesquisa + "%")
+				.setParameter("pesquisa", "%" + pesquisa.toUpperCase() + "%")
 				.getResultList();
 		return entitys;
 	}	
