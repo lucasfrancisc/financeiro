@@ -22,8 +22,7 @@ public class TituloController {
 	public TituloController(Result result) {
 		this.result = result;
 		this.manager = FabricaEntityManagerFactory.getEntityManagerFactory().createEntityManager();
-		dao = new TituloDAO(manager);
-		System.out.println("Lucas");
+		dao = new TituloDAO(manager);		
 	}
 	
 	public void add() {

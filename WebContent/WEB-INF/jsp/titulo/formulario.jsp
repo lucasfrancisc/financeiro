@@ -6,14 +6,14 @@
 		<meta charset="UTF-8">		
 		<title>Título</title>
 		
-		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap-theme.min.css" />
-		<script src="/meufinanceiro/jquery/jquery.min.js"></script>
-		<script src="/meufinanceiro/bootstrap/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap-theme.min.css" />
+		<script src="/financeiro/jquery/jquery.min.js"></script>
+		<script src="/financeiro/bootstrap/js/bootstrap.min.js"></script>
 		
-		<script src="/meufinanceiro/js/titulo.js" charset="UTF-8" ></script>
-		<script src="/meufinanceiro/js/tituloold.js" charset="UTF-8" ></script>
-		<script src="/meufinanceiro/js/exercicio4.js" charset="UTF-8" ></script>
+		<script src="/financeiro/js/titulo.js" charset="UTF-8" ></script>
+		<script src="/financeiro/js/tituloold.js" charset="UTF-8" ></script>
+		<script src="/financeiro/js/exercicio4.js" charset="UTF-8" ></script>
 	</head>
 	
 	<body>
