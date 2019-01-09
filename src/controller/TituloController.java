@@ -1,18 +1,28 @@
 package controller;
 
+import java.io.File;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import model.dao.database.jpa.TituloDAO;
 import model.entity.Titulo;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import util.enumeration.Operacao;
 
 @Resource
 public class TituloController extends GenericController<Titulo, TituloDAO> {
 		
-	public TituloController(Result result) {
+	private ServletContext context;
+	
+	public TituloController(Result result, ServletContext context) {		
 		super(result);		
+		this.context = context;
 	}
 	
 	public void add() {
@@ -72,4 +82,26 @@ public class TituloController extends GenericController<Titulo, TituloDAO> {
 		result.include("pesquisa", pesquisa);
 	}
 	
+	public byte[] relatorio() {
+		// 1 
+		String jasperFile = "relatorios" + File.separator + "titulo-teste.jasper";
+		String caminhoJasper = context.getRealPath(jasperFile);
+		
+		// 2
+		List<Titulo> titulos = dao.find("");
+		
+		try {
+			// 3
+			JasperPrint jasperCompilado = JasperFillManager.fillReport(caminhoJasper, null, new JRBeanCollectionDataSource(titulos));
+			
+			// 4
+			byte[] pdf = JasperExportManager.exportReportToPdf(jasperCompilado);
+			
+			// 5
+			return pdf;
+			
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
