@@ -13,6 +13,7 @@ import util.FuncoesUtil;
 import util.enumeration.Operacao;
 import javax.persistence.Query;
 
+@SuppressWarnings("unused")
 @Resource
 public class PessoaController {
 	
@@ -59,8 +60,7 @@ public class PessoaController {
 		}
 		
 		result.redirectTo(this).listagem("");
-	}
-	
+	}	
 	
 	public void excluir(Long id) {
 		try {
@@ -76,17 +76,13 @@ public class PessoaController {
 		result.redirectTo(this).listagem("");
 	}
 	
-//	public void listagem(String pesquisa) {
-//		List<Pessoa> entitys = dao.find(pesquisa);
-//		result.include("entitys", entitys);
-//		result.include("pesquisa", pesquisa);
-//	}
-	
+	@SuppressWarnings("unchecked")
 	public void listagem(String pesquisa) {
 		List<Pessoa> qry = manager.createQuery("Select p From Pessoa as p order by p.id").getResultList();
 		result.include("qry", qry);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void localiza(String pesquisa) {
 		List<Pessoa> qry = manager.createQuery("Select p From Pessoa as p order by p.nome").getResultList();
 		result.include("qry", qry);

@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Insert title here</title>
-		<script src="/meufinanceiro/jquery/jquery.min.js"></script>
+		<script src="/financeiro/jquery/jquery.min.js"></script>
 	</head>
 	<body>
 		
@@ -24,12 +24,12 @@
 					<tr>
 						<td>${t.id}</td>
 						<td>${t.descricao}</td>
-						<td><a href="exibir?id=${t.id}">Exibir</a></td>
-						<td><a href="excluir" class="btn-excluir btn btn-sm btn-danger" titulo-id="${t.descricao}">Excluir</a></td>
+						<td><a href="exibi?id=${t.id}">Exibir</a></td>
+						<td><a href="exclui" class="btn-excluir btn btn-sm btn-danger" titulo-id="${t.descricao}">Excluir</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</body>
-	<script src="/meufinanceiro/js/titulo-listagem.js"></script>
+	<script src="/financeiro/js/titulo-listagem.js"></script>
 </html>

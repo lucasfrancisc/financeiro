@@ -10,7 +10,9 @@ import model.dao.database.jdbc.DatabaseUtil;
 import model.dao.database.jpa.CentroCustoDAO;
 import model.dao.database.jpa.FabricaEntityManagerFactory;
 import model.entity.CentroCusto;
+import util.enumeration.Operacao;
 
+@SuppressWarnings("unused")
 @Resource
 public class CentroCustoController {
 	
@@ -19,6 +21,7 @@ public class CentroCustoController {
 	private final CentroCustoDAO dao;
 	private final EntityManager manager;
 	
+	@SuppressWarnings("static-access")
 	public CentroCustoController(Result result) {
 		this.result = result;
 		databaseUtil = databaseUtil.getInstanciaUnica();
@@ -26,33 +29,36 @@ public class CentroCustoController {
 		dao = new CentroCustoDAO(manager);
 	}
 	
-	public void add() {
+	public void inclui() {
+		CentroCusto entity = new CentroCusto();
+		entity.setOperacao(Operacao.INCLUSAO);
+		result.include("entity", entity);
 	}
 	
-	public void save(CentroCusto centroCusto) {
+	public void grava(CentroCusto centroCusto) {
 		try {
 			manager.getTransaction().begin();
 			
 			if (centroCusto.getId() == null) {
 				dao.create(centroCusto);
-				System.out.println("Título incluido com sucesso!");
+				System.out.println("Centro de Custo incluido com sucesso!");
 			} else {
 				dao.update(centroCusto);
-				System.out.println("Título alterado com sucesso!");
+				System.out.println("Centro de Custo alterado com sucesso!");
 			}
 			manager.getTransaction().commit();
 		} catch(Exception e) {
 			manager.getTransaction().rollback();
 		}
-		result.redirectTo(this).listagem("");
+		result.redirectTo(this).lista("");
 	}
 	
-	public void exibir(Long id) {
+	public void exibi(Long id) {
 		CentroCusto centroCusto = dao.read(id);
 		result.include("centroCusto", centroCusto);
 	}
 	
-	public void excluir(Long id) {
+	public void exclui(Long id) {
 	  try {	
   	    manager.getTransaction().begin();
 		dao.delete(id);
@@ -61,19 +67,13 @@ public class CentroCustoController {
 		  manager.getTransaction().rollback();  
 	  }
 	  
-	  result.redirectTo(this).listagem("");
+	  result.redirectTo(this).lista("");
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void listagem(String pesquisa) {
-		if (pesquisa == null) {
-			pesquisa = "";	
-		}
-		
-		List<CentroCusto> centroCusto = manager.createQuery("Select t From CentroCusto as t where t.descricao like :pesquisa order by t.id")
-				                               .setParameter("pesquisa", "%" + pesquisa + "%")
-				                               .getResultList();
-		result.include("centroCusto", centroCusto);
+	public void lista(String pesquisa) {
+		List<CentroCusto> entitys = dao.find(pesquisa);
+		result.include("entitys", entitys);
+		result.include("pesquisa", pesquisa);
 	}
 	
 }

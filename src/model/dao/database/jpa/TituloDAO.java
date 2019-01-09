@@ -1,7 +1,6 @@
 package model.dao.database.jpa;
 
 import javax.persistence.EntityManager;
-
 import model.entity.Titulo;
 
 public class TituloDAO extends GenericDAO<Titulo> {

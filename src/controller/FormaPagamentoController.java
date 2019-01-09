@@ -31,16 +31,15 @@ public class FormaPagamentoController {
 	public void cadastro(){
 	
 	}
-
 	
-	@Get("/formaPagamento/listagem")
-	public void listagem() {
-		List<FormaPagamento> formas = dao.get(); 
-		result.include("formas", formas);		
+	public void lista(String pesquisa) {
+		List<FormaPagamento> entitys = dao.find(pesquisa);
+		result.include("entitys", entitys);
+		result.include("pesquisa", pesquisa);
 	}
 	
 	@Post("/formaPagamento")
-	public void save(FormaPagamento entity) {
+	public void grava(FormaPagamento entity) {
 		try {
 			FuncoesUtil.iniciaTransacao(manager);
 			
@@ -56,15 +55,15 @@ public class FormaPagamentoController {
 			FuncoesUtil.cancelaTransacao(manager);
 		}
 		
-		result.redirectTo(this).listagem();
+		result.redirectTo(this).lista("");
 	}
 	
-	public void exibir(Long id) {
+	public void exibi(Long id) {
 		FormaPagamento entity = dao.read(id);
 		result.include("entity", entity);
 	}
 	
-	public void excluir(Long id) {
+	public void exclui(Long id) {
 		try {
 			FuncoesUtil.iniciaTransacao(manager);
 			
@@ -75,7 +74,7 @@ public class FormaPagamentoController {
 			FuncoesUtil.cancelaTransacao(manager);
 		}
 		
-		result.redirectTo(this).listagem();
+		result.redirectTo(this).lista("");
 	}	
 	
 }

@@ -8,18 +8,17 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import model.dao.database.jpa.ContaDAO;
 import model.dao.database.jpa.FabricaEntityManagerFactory;
+import model.dao.database.jpa.GenericDAO;
 import model.entity.Conta;
 import util.FuncoesUtil;
 import util.enumeration.Operacao;
 
 @Resource
-public class ContaController {
+public class ContaController extends GenericController<Conta, ContaDAO> {
 	
 	private Result result;
 	private final EntityManager manager;	
 	private final ContaDAO dao;
-	@SuppressWarnings("unused")
-	private static List<Conta> listaconta;
 	
 	public ContaController(Result result) {
 		this.result = result;	
@@ -86,10 +85,9 @@ public class ContaController {
 		result.redirectTo(this).lista("");
 	}
 	
-	public void lista(String descricao) {
-		/*List<Conta> listaconta = manager.createQuery("select e from Conta e").getResultList();*/
-		List<Conta> listaconta = dao.find(descricao);
-		result.include("listaconta",listaconta);	
-		result.include("descricao", descricao);
+	public void lista(String pesquisa) {
+		List<Conta> entitys = dao.find(pesquisa);
+		result.include("entitys",entitys);	
+		result.include("pesquisa", pesquisa);
 	}		
 }

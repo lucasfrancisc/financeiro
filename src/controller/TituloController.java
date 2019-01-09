@@ -23,20 +23,19 @@ public class TituloController {
 		this.result = result;
 		this.manager = FabricaEntityManagerFactory.getEntityManagerFactory().createEntityManager();
 		dao = new TituloDAO(manager);
-		System.out.println("Lucas");
 	}
 	
-	public void add() {
+	public void inclui() {
 		Titulo entity = new Titulo();
 		entity.setOperacao(Operacao.INCLUSAO);
 		result.include("entity", entity);
 	}
 	
-	public void exibir(Long id) {
+	public void exibi(Long id) {
 		this.exibirUpdate(id, Operacao.EXIBICAO);
 	}
 	
-	public void update(Long id) {
+	public void altera(Long id) {
 		this.exibirUpdate(id, Operacao.ALTERACAO);
 	}
 	
@@ -46,7 +45,7 @@ public class TituloController {
 		result.include("entity", entity);
 	}
 	
-	public void save(Titulo entity) {
+	public void grava(Titulo entity) {
 		try {
 			FuncoesUtil.iniciaTransacao(manager);
 			
@@ -62,10 +61,10 @@ public class TituloController {
 			FuncoesUtil.cancelaTransacao(manager);
 		}
 		
-		result.redirectTo(this).listagem("");
+		result.redirectTo(this).lista("");
 	}
 	
-	public void excluir(Long id) {
+	public void exclui(Long id) {
 		try {
 			FuncoesUtil.iniciaTransacao(manager);
 			
@@ -76,10 +75,10 @@ public class TituloController {
 			FuncoesUtil.cancelaTransacao(manager);
 		}
 		
-		result.redirectTo(this).listagem("");
+		result.redirectTo(this).lista("");
 	}
 	
-	public void listagem(String pesquisa) {
+	public void lista(String pesquisa) {
 		List<Titulo> entitys = dao.find(pesquisa);
 		result.include("entitys", entitys);
 		result.include("pesquisa", pesquisa);

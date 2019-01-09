@@ -5,14 +5,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
- 		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap.min.css" /> 
- 		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap-theme.min.css" />	 
-		<script src="/meufinanceiro/bootstrap/js/bootstrap.min.js"></script>	
+ 		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap.min.css" /> 
+ 		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap-theme.min.css" />	 
+		<script src="/financeiro/bootstrap/js/bootstrap.min.js"></script>	
 		<title>Cadastro de Forma de Pagamento</title>
 	</head>
 	<body>
 		<H2>Listagem - Forma de Pagamento</H2>
-		<c:forEach items="${formas}" var="forma">
+		<c:forEach items="${entitys}" var="forma">
 			ID: 	  ${forma.id} <br>
 			Decrição: ${forma.descricao} <br>
 			Tipo: 	  ${forma.tipo} <br>

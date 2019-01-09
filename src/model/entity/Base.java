@@ -28,7 +28,7 @@ public class Base {
 	public Operacao getOperacao() {
 		return operacao;
 	}
-
+//static
 	public void setOperacao(Operacao operacao) {
 		this.operacao = operacao;
 	}

@@ -3,12 +3,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
-		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap-min.css">
-		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap-theme.min.css">
-		<script>src="/meufinanceiro/bootstrap/js/bootstrap.min.js"</script>
-		<script>src="/meufinanceiro/jquery/jquery.min.js"</script>
-		<script>src="/meufinanceiro/js/conta.js"</script>
+		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap-min.css">
+		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap-theme.min.css">
+		<script>src="/financeiro/bootstrap/js/bootstrap.min.js"</script>
+		<script>src="/financeiro/jquery/jquery.min.js"</script>
+		<script>src="/financeiro/js/conta.js"</script>
 		<title>Listagem: Conta</title>
 	</head>
 	<body>
@@ -17,7 +17,7 @@
 		</div>
 		<form >	
 			<div>
-				<input type="text" name="descricao" value="${descricao}">
+				<input type="text" name="pesquisa" value="${pesquisa}">
 				<button class="btn btn-default">Filtro: Descrição</button>
 				<a class="btn btn-success" href="inclui">Novo</a>	
 			</div> 			
@@ -33,7 +33,7 @@
         			<th scope="col">Exclui</th>
    				</tr>		
 				<tbody>
-					<c:forEach items="${listaconta}" var="c">
+					<c:forEach items="${entitys}" var="c">
 					<tr>
 						<td>${c.id}</td>
 						<td>${c.descricao}</td>
