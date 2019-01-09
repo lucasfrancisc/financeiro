@@ -8,10 +8,8 @@ import model.entity.Conta;
 
 public class ContaDAO extends GenericDAO<Conta> {
 	
-	private final EntityManager manager;
-	
 	public ContaDAO(EntityManager manager) {
-		this.manager = manager;
+		super(manager);
 	}
 
 	@Override
@@ -46,5 +44,11 @@ public class ContaDAO extends GenericDAO<Conta> {
 				.setParameter("texto", "%" + texto + "%")
 				.getResultList();
 		return entitys;
+	}
+
+	@Override
+	protected String getSelectFind() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

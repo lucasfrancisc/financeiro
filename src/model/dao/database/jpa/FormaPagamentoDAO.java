@@ -8,10 +8,8 @@ import model.entity.FormaPagamento;
 
 public class FormaPagamentoDAO extends GenericDAO<FormaPagamento> {
 
-	private final EntityManager manager;
-	
 	public FormaPagamentoDAO(EntityManager manager) {
-		this.manager = manager;
+		super(manager);
 	}
 	
 	@Override
@@ -37,6 +35,12 @@ public class FormaPagamentoDAO extends GenericDAO<FormaPagamento> {
 	}
 	
 	public List<FormaPagamento> get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String getSelectFind() {
 		// TODO Auto-generated method stub
 		return null;
 	}

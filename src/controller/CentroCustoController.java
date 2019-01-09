@@ -6,74 +6,40 @@ import java.util.List;
 
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import model.dao.database.jdbc.DatabaseUtil;
 import model.dao.database.jpa.CentroCustoDAO;
-import model.dao.database.jpa.FabricaEntityManagerFactory;
 import model.entity.CentroCusto;
+import util.enumeration.Operacao;
 
 @Resource
-public class CentroCustoController {
-	
-	private Result result;
-	private DatabaseUtil databaseUtil;
-	private final CentroCustoDAO dao;
-	private final EntityManager manager;
+public class CentroCustoController extends GenericController<CentroCusto, CentroCustoDAO> {
 	
 	public CentroCustoController(Result result) {
-		this.result = result;
-		databaseUtil = databaseUtil.getInstanciaUnica();
-		manager  = FabricaEntityManagerFactory.getUnicaInstancia().getEntityManagerFactory().createEntityManager();
-		dao = new CentroCustoDAO(manager);
+		super(result);		
 	}
 	
 	public void add() {
-	}
-	
-	public void save(CentroCusto centroCusto) {
-		try {
-			manager.getTransaction().begin();
-			
-			if (centroCusto.getId() == null) {
-				dao.create(centroCusto);
-				System.out.println("Título incluido com sucesso!");
-			} else {
-				dao.update(centroCusto);
-				System.out.println("Título alterado com sucesso!");
-			}
-			manager.getTransaction().commit();
-		} catch(Exception e) {
-			manager.getTransaction().rollback();
-		}
-		result.redirectTo(this).listagem("");
+		super.add();		
+		listagem("");
 	}
 	
 	public void exibir(Long id) {
-		CentroCusto centroCusto = dao.read(id);
-		result.include("centroCusto", centroCusto);
+		this.exibirUpdate(id, Operacao.EXIBICAO);
 	}
 	
-	public void excluir(Long id) {
-	  try {	
-  	    manager.getTransaction().begin();
-		dao.delete(id);
-		manager.getTransaction().commit();
-	  } catch(Exception e) {
-		  manager.getTransaction().rollback();  
-	  }
-	  
-	  result.redirectTo(this).listagem("");
+	public void update(Long id) {
+		this.exibirUpdate(id, Operacao.ALTERACAO);
 	}
 	
-	@SuppressWarnings("unchecked")
+	private void exibirUpdate(Long id, Operacao operacao) {
+		CentroCusto entity = dao.read(id);
+		entity.setOperacao(operacao);
+		result.include("entity", entity);
+	}
+	
 	public void listagem(String pesquisa) {
-		if (pesquisa == null) {
-			pesquisa = "";	
-		}
-		
-		List<CentroCusto> centroCusto = manager.createQuery("Select t From CentroCusto as t where t.descricao like :pesquisa order by t.id")
-				                               .setParameter("pesquisa", "%" + pesquisa + "%")
-				                               .getResultList();
-		result.include("centroCusto", centroCusto);
+		List<CentroCusto> entitys = dao.find(pesquisa);
+		result.include("entitys", entitys);
+		result.include("pesquisa", pesquisa);
 	}
 	
 }

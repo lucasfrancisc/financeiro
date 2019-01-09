@@ -8,10 +8,8 @@ import model.entity.CentroCusto;
 
 public class CentroCustoDAO extends GenericDAO<CentroCusto> {
 
-	private final EntityManager manager;
-	
 	public CentroCustoDAO(EntityManager manager) {
-		this.manager = manager;
+		super(manager);
 	}
 	
 	@Override
@@ -43,10 +41,16 @@ public class CentroCustoDAO extends GenericDAO<CentroCusto> {
 		}
 		
 		List<CentroCusto> dados = manager
-				.createQuery("SELECT * From centroCusto Where descricao LIKE :pesquisa")
+				.createQuery("SELECT t FROM CentroCusto As t Where descricao LIKE :pesquisa")
 				.setParameter("pesquisa", "%" + pesquisa + "%")
 				.getResultList();
 		return dados;
+	}
+
+	@Override
+	protected String getSelectFind() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

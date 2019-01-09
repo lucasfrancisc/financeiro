@@ -1,1 +1,8 @@
 /META-INF/
+<<<<<<< HEAD
+=======
+/controller/
+/database.properties
+/model/
+/util/
+>>>>>>> master
