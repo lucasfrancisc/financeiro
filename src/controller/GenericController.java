@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import br.com.caelum.vraptor.Result;
 import model.dao.database.jpa.FabricaEntityManagerFactory;
 import model.dao.database.jpa.GenericDAO;
-import model.dao.database.jpa.TituloDAO;
 import model.entity.Base;
 import util.enumeration.Operacao;
 
@@ -17,7 +16,7 @@ public class GenericController <T extends Base, D extends GenericDAO<T>> {
 	private final Class<D> clazzDAO;
 	protected D dao;
 	protected final Result result;
-	private final EntityManager manager;
+	protected final EntityManager manager;
 	
 	@SuppressWarnings("unchecked")
 	public GenericController(Result result) {
@@ -42,6 +41,6 @@ public class GenericController <T extends Base, D extends GenericDAO<T>> {
 		}
 		
 		entity.setOperacao(Operacao.INCLUSAO);
-		result.include("entity", entity);
+		result.include("entity", entity);		
 	}
 }

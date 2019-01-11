@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Titulo extends Base {
@@ -15,7 +16,11 @@ public class Titulo extends Base {
 
 	private Date emissao;
 	
-	private BigDecimal valor;	
+	private BigDecimal valor;
+	
+	// Checar @OneToMany
+	@OneToOne
+	private Pessoa pessoa;
 	
 	public String getDescricao() {
 		return descricao;
@@ -47,5 +52,13 @@ public class Titulo extends Base {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 }

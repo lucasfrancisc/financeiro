@@ -57,7 +57,7 @@
 											
 											<input type="hidden" name="entity.operacao" value="${entity.operacao}">
 											
-											<div class="col-lg-3">
+											<div class="col-xs-12 col-sm-6 col-md-9 col-lg-3">
 												<div class="form-group">
 													<label for="label-descricao" class="control-label">Descrição:</label>
 													<input id="input-descricao" class="form-control" type="text" 
@@ -89,6 +89,17 @@
 													<label id="label-emissao" class="control-label">Emissão:</label>
 													<input id="input-emissao" class="form-control" type="text" name="entity.emissao"
 														value="<fmt:formatDate value="${entity.emissao}" pattern="dd/MM/yyyy" />">												
+												</div>
+											</div>
+											
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label id="label-pessoa" class="control-label">Pessoa:</label>
+													<select class="selectpicker" name="entity.pessoa.id">
+														<c:forEach items="${listaPessoas}" var="pes">
+															<option value="${pes.id}">${pes.nome}</option>
+														</c:forEach>
+													</select>
 												</div>
 											</div>
 										</div>
