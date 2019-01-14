@@ -1,7 +1,5 @@
 package controller;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.List;
 
 import br.com.caelum.vraptor.Resource;
@@ -19,7 +17,6 @@ public class CentroCustoController extends GenericController<CentroCusto, Centro
 	
 	public void add() {
 		super.add();		
-		listagem("");
 	}
 	
 	public void exibir(Long id) {
@@ -34,6 +31,11 @@ public class CentroCustoController extends GenericController<CentroCusto, Centro
 		CentroCusto entity = dao.read(id);
 		entity.setOperacao(operacao);
 		result.include("entity", entity);
+	}
+	
+	public void save() { 
+		super.save();
+		result.redirectTo(this).listagem("");
 	}
 	
 	public void listagem(String pesquisa) {

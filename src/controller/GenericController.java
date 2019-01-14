@@ -44,4 +44,30 @@ public class GenericController <T extends Base, D extends GenericDAO<T>> {
 		entity.setOperacao(Operacao.INCLUSAO);
 		result.include("entity", entity);
 	}
+	
+ 	public void save() {
+	  try {
+		  T entity = null;
+		  try {
+		      entity = clazz.newInstance();
+		      entity.setOperacao(Operacao.INCLUSAO);
+		  } catch(Exception e) {
+			  throw new RuntimeException(e);
+		  }
+		
+		  this.manager.getTransaction().begin();
+		
+		  if (entity.getOperacao().equals(Operacao.INCLUSAO)) {
+			  dao.create(entity);
+			  System.out.println("Título incluido com sucesso!");
+		  } else if (entity.getOperacao().equals(Operacao.ALTERACAO)){
+			  dao.update(entity);
+		  	  System.out.println("Título alterado com sucesso!");
+		  }
+	  	  this.manager.getTransaction().commit();
+	  } catch(Exception e) {
+		  this.manager.getTransaction().rollback();
+	  }
+    }
+
 }

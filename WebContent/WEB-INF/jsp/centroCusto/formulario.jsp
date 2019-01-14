@@ -6,10 +6,10 @@
   <meta charset="UTF-8">
   <title>Insert title here</title>
   
-  <link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap-theme.min.css" />
-  <script src="/meufinanceiro/jquery/jquery.min.js"></script>
-  <script src="/meufinanceiro/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap-theme.min.css" />
+  <script src="/financeiro/jquery/jquery.min.js"></script>
+  <script src="/financeiro/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -36,7 +36,7 @@
 					<div class="form-group">
 					  <label for="label-id" class="control-label">Código:</label>
 					  <input id="input-id" class="form-control" type="text" 
-						     name="centroCusto.id" value="${centroCusto.id}">
+						     name="entity.id" value="${entity.id}">
 					</div>
 				  </div>
 				  
@@ -44,7 +44,7 @@
 					<div class="form-group">
 					  <label for="label-descricao" class="control-label">Descrição:</label>
 					  <input id="input-descricao" class="form-control" type="text" 
-							 name="centroCusto.descricao" value="${centroCusto.descricao}">
+							 name="entity.descricao" value="${entity.descricao}">
 					</div>
 				  </div>
 				  
@@ -52,7 +52,7 @@
 					<div class="form-group">
 					  <label for="label-descricao" class="control-label">Número:</label>
 					  <input id="input-descricao" class="form-control" type="text" 
-							 name="centroCusto.numero" value="${centroCusto.numero}">
+							 name="entity.numero" value="${entity.numero}">
 					</div>
 				  </div>
 				  

@@ -43,24 +43,24 @@ public class TituloController extends GenericController<Titulo, TituloDAO> {
 		result.include("entity", entity);
 	}
 	
-//	public void save(Titulo entity) {
-//		try {
-//			FuncoesUtil.iniciaTransacao(manager);
-//			
-//			if (entity.getOperacao().equals(Operacao.INCLUSAO)) {
-//				dao.create(entity);
-//				System.out.println("Título incluido com sucesso!");
-//			} else if (entity.getOperacao().equals(Operacao.ALTERACAO)){
-//				dao.update(entity);
-//				System.out.println("Título alterado com sucesso!");
-//			}
-//			FuncoesUtil.comitaTransacao(manager);
-//		} catch(Exception e) {
-//			FuncoesUtil.cancelaTransacao(manager);
-//		}
-//		
-//		result.redirectTo(this).listagem("");
-//	}
+	public void save(Titulo entity) {
+		try {
+			FuncoesUtil.iniciaTransacao(manager);
+			
+			if (entity.getOperacao().equals(Operacao.INCLUSAO)) {
+				dao.create(entity);
+				System.out.println("Título incluido com sucesso!");
+			} else if (entity.getOperacao().equals(Operacao.ALTERACAO)){
+				dao.update(entity);
+				System.out.println("Título alterado com sucesso!");
+			}
+			FuncoesUtil.comitaTransacao(manager);
+		} catch(Exception e) {
+			FuncoesUtil.cancelaTransacao(manager);
+		}
+		
+		result.redirectTo(this).listagem("");
+	}
 //	
 //	public void excluir(Long id) {
 //		try {
