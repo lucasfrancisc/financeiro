@@ -1,34 +1,32 @@
 package controller;
 
+import java.io.File;
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import javax.servlet.ServletContext;
 
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import model.dao.database.jpa.FabricaEntityManagerFactory;
 import model.dao.database.jpa.TituloDAO;
 import model.entity.Titulo;
-import util.FuncoesUtil;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import util.enumeration.Operacao;
 
 @Resource
-public class TituloController {
-	
-	private Result result;		
-	private final EntityManager manager;
-	private final TituloDAO dao;
+public class TituloController extends GenericController<Titulo, TituloDAO> {
 		
-	public TituloController(Result result) {
-		this.result = result;
-		this.manager = FabricaEntityManagerFactory.getEntityManagerFactory().createEntityManager();
-		dao = new TituloDAO(manager);
+	private ServletContext context;
+	
+	public TituloController(Result result, ServletContext context) {		
+		super(result);		
+		this.context = context;
 	}
 	
 	public void add() {
-		Titulo entity = new Titulo();
-		entity.setOperacao(Operacao.INCLUSAO);
-		result.include("entity", entity);
+		super.add();		
 	}
 	
 	public void exibir(Long id) {
@@ -45,38 +43,38 @@ public class TituloController {
 		result.include("entity", entity);
 	}
 	
-	public void save(Titulo entity) {
-		try {
-			FuncoesUtil.iniciaTransacao(manager);
-			
-			if (entity.getOperacao().equals(Operacao.INCLUSAO)) {
-				dao.create(entity);
-				System.out.println("Título incluido com sucesso!");
-			} else if (entity.getOperacao().equals(Operacao.ALTERACAO)){
-				dao.update(entity);
-				System.out.println("Título alterado com sucesso!");
-			}
-			FuncoesUtil.comitaTransacao(manager);
-		} catch(Exception e) {
-			FuncoesUtil.cancelaTransacao(manager);
-		}
-		
-		result.redirectTo(this).listagem("");
-	}
-	
-	public void excluir(Long id) {
-		try {
-			FuncoesUtil.iniciaTransacao(manager);
-			
-			dao.delete(id);
-			
-			FuncoesUtil.comitaTransacao(manager);
-		} catch(Exception e) {
-			FuncoesUtil.cancelaTransacao(manager);
-		}
-		
-		result.redirectTo(this).listagem("");
-	}
+//	public void save(Titulo entity) {
+//		try {
+//			FuncoesUtil.iniciaTransacao(manager);
+//			
+//			if (entity.getOperacao().equals(Operacao.INCLUSAO)) {
+//				dao.create(entity);
+//				System.out.println("Título incluido com sucesso!");
+//			} else if (entity.getOperacao().equals(Operacao.ALTERACAO)){
+//				dao.update(entity);
+//				System.out.println("Título alterado com sucesso!");
+//			}
+//			FuncoesUtil.comitaTransacao(manager);
+//		} catch(Exception e) {
+//			FuncoesUtil.cancelaTransacao(manager);
+//		}
+//		
+//		result.redirectTo(this).listagem("");
+//	}
+//	
+//	public void excluir(Long id) {
+//		try {
+//			FuncoesUtil.iniciaTransacao(manager);
+//			
+//			dao.delete(id);
+//			
+//			FuncoesUtil.comitaTransacao(manager);
+//		} catch(Exception e) {
+//			FuncoesUtil.cancelaTransacao(manager);
+//		}
+//		
+//		result.redirectTo(this).listagem("");
+//	}
 	
 	public void listagem(String pesquisa) {
 		List<Titulo> entitys = dao.find(pesquisa);
@@ -84,4 +82,26 @@ public class TituloController {
 		result.include("pesquisa", pesquisa);
 	}
 	
+	public byte[] relatorio() {
+		// 1 
+		String jasperFile = "relatorios" + File.separator + "titulo-teste.jasper";
+		String caminhoJasper = context.getRealPath(jasperFile);
+		
+		// 2
+		List<Titulo> titulos = dao.find("");
+		
+		try {
+			// 3
+			JasperPrint jasperCompilado = JasperFillManager.fillReport(caminhoJasper, null, new JRBeanCollectionDataSource(titulos));
+			
+			// 4
+			byte[] pdf = JasperExportManager.exportReportToPdf(jasperCompilado);
+			
+			// 5
+			return pdf;
+			
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
