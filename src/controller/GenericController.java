@@ -17,7 +17,7 @@ public class GenericController <T extends Base, D extends GenericDAO<T>> {
 	private final Class<D> clazzDAO;
 	protected D dao;
 	protected final Result result;
-	private final EntityManager manager;
+	protected final EntityManager manager;
 	
 	@SuppressWarnings("unchecked")
 	public GenericController(Result result) {

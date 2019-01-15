@@ -1,39 +1,41 @@
 package controller;
 
+import java.io.File;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import model.dao.database.jdbc.DatabaseUtil;
+import javax.servlet.ServletContext;
+
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import model.dao.database.jpa.FabricaEntityManagerFactory;
 import model.dao.database.jpa.PessoaDAO;
 import model.entity.Pessoa;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import util.FuncoesUtil;
 import util.enumeration.Operacao;
-import javax.persistence.Query;
 
 @Resource
-public class PessoaController {
+public class PessoaController extends GenericController<Pessoa, PessoaDAO> {
+		
+	private ServletContext context;
 	
-	private Result result;	
-	private final EntityManager manager;
-	private final PessoaDAO dao;
-	
-	public PessoaController(Result result) {
-		this.result = result;
-		this.manager = FabricaEntityManagerFactory.getEntityManagerFactory().createEntityManager();
-		dao = new PessoaDAO(manager);
+	public PessoaController(Result result, ServletContext context) {		
+		super(result);		
+		this.context = context;
 	}
 	
 	public void add() {
-		Pessoa entity = new Pessoa();
-		entity.setOperacao(Operacao.INCLUSAO);
-		result.include("entity", entity);
+		super.add();		
 	}
 	
 	public void exibir(Long id) {
 		this.exibirUpdate(id, Operacao.EXIBICAO);
+	}
+	
+	public void update(Long id) {
+		this.exibirUpdate(id, Operacao.ALTERACAO);
 	}
 	
 	private void exibirUpdate(Long id, Operacao operacao) {
@@ -60,8 +62,8 @@ public class PessoaController {
 		
 		result.redirectTo(this).listagem("");
 	}
-	
-	
+//	
+//	
 	public void excluir(Long id) {
 		try {
 			FuncoesUtil.iniciaTransacao(manager);
@@ -76,20 +78,43 @@ public class PessoaController {
 		result.redirectTo(this).listagem("");
 	}
 	
-//	public void listagem(String pesquisa) {
-//		List<Pessoa> entitys = dao.find(pesquisa);
-//		result.include("entitys", entitys);
-//		result.include("pesquisa", pesquisa);
-//	}
-	
 	public void listagem(String pesquisa) {
-		List<Pessoa> qry = manager.createQuery("Select p From Pessoa as p order by p.id").getResultList();
-		result.include("qry", qry);
+		List<Pessoa> entitys = dao.find(pesquisa);
+		result.include("entitys", entitys);
+		result.include("pesquisa", pesquisa);
 	}
 	
 	public void localiza(String pesquisa) {
-		List<Pessoa> qry = manager.createQuery("Select p From Pessoa as p order by p.nome").getResultList();
-		result.include("qry", qry);
+		List<Pessoa> entitys =  dao.find("");
+		result.include("pesquisa", entitys);
+
+	}
+	
+	public void menu() {
+		
+	}
+	
+	public byte[] relatorio() {
+		// 1 
+		String jasperFile = "relatorios" + File.separator + "ListaPessoa.jasper";
+		String caminhoJasper = context.getRealPath(jasperFile);
+		
+		// 2
+		List<Pessoa> pessoa = dao.find("");
+		
+		try {
+			// 3
+			JasperPrint jasperCompilado = JasperFillManager.fillReport(caminhoJasper, null, new JRBeanCollectionDataSource(pessoa));
+			
+			// 4
+			byte[] pdf = JasperExportManager.exportReportToPdf(jasperCompilado);
+			
+			// 5
+			return pdf;
+			
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 		
 	

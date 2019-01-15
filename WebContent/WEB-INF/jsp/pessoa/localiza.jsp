@@ -26,7 +26,7 @@
     </thead>
     <tbody id="myTable">
       <tr>
-	    <c:forEach items="${qry}" var="p">
+	    <c:forEach items="${pesquisa}" var="p">
 	  	  <tr>
 		    <td>${p.id}</td>
 		    <td>${p.nome}</td>

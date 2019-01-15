@@ -5,10 +5,12 @@
 	<head>
 		<meta charset="UTF-8" >
 		
-		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap-theme.min.css" />
-		<script src="/meufinanceiro/jquery/jquery.min.js"></script>
-		<script src="/meufinanceiro/bootstrap/js/bootstrap.min.js"></script>
+	
+		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap-theme.min.css" />
+		
+		<script src="/financeiro/jquery/jquery.min.js"></script>
+		<script src="/financeiro/bootstrap/js/bootstrap.min.js"></script>
 	
 		<script src="/meufinanceiro/js/pessoa.js" charset="UTF-8" ></script>
 	</head>
