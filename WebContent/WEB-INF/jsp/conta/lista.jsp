@@ -12,15 +12,24 @@
 		<title>Listagem: Conta</title>
 	</head>
 	<body>
-		<div class="jumbotron">
+		<div class="page-header">
 		  	<h1>Listagem de Conta</h1>
 		</div>
 		<form >	
-			<div>
-				<input type="text" name="pesquisa" value="${pesquisa}">
-				<button class="btn btn-default">Filtro: Descrição</button>
-				<a class="btn btn-success" href="inclui">Novo</a>	
-			</div> 			
+			<table class="table table-sm">
+			    <tr>
+        			<th>
+        				<input type="text" name="pesquisa" value="${pesquisa}">
+						<button class="btn btn-default">Filtro: Descrição</button>
+					</th>				
+					<th><a class="btn btn-success" href="inclui">Novo</a></th>
+					<th>
+						<a href="/financeiro/conta/menu">Menu
+						  	<span class="glyphicon glyphicon-home"></span>
+					  	</a>
+					 </th>
+				</tr>	
+			</table>		
 
  			<table class="table table-sm">
     			<tr>
@@ -28,9 +37,9 @@
         			<th scope="col">Descrição</th>
         			<th scope="col">Tipo</th>
         			<th scope="col">Saldo</th>
-        			<th scope="col">Consulta</th>
-        			<th scope="col">Altera</th>
-        			<th scope="col">Exclui</th>
+        			<th scope="col"></th>
+        			<th scope="col"></th>
+        			<th scope="col"></th>
    				</tr>		
 				<tbody>
 					<c:forEach items="${entitys}" var="c">

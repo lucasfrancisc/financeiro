@@ -91,6 +91,16 @@
 														value="<fmt:formatDate value="${entity.emissao}" pattern="dd/MM/yyyy" />">												
 												</div>
 											</div>
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label id="label-pessoa" class="control-label">Pessoa:</label>
+													<select class="selectpicker" name="entity.pessoa.id">
+														<c:forEach items="${listaPessoas}" var="pes">
+															<option value="${pes.id}">${pes.nome}</option>
+														</c:forEach>
+													</select>
+												</div>
+											</div>											
 										</div>
 									</div>
 								</fieldset>

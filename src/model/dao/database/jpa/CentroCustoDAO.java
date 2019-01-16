@@ -11,7 +11,7 @@ public class CentroCustoDAO extends GenericDAO<CentroCusto> {
 
 	@Override
 	protected String getSelectFind() {
-		return "SELECT * From centroCusto Where descricao LIKE :pesquisa";
+		return "SELECT c From CentroCusto AS c Where c.descricao LIKE :pesquisa";
 	}
 
 }

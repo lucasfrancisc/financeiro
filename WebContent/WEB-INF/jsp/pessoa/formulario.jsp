@@ -5,12 +5,12 @@
 	<head>
 		<meta charset="UTF-8" >
 		
-		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap-theme.min.css" />
-		<script src="/meufinanceiro/jquery/jquery.min.js"></script>
-		<script src="/meufinanceiro/bootstrap/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/financeiro/bootstrap/css/bootstrap-theme.min.css" />
+		<script src="/financeiro/jquery/jquery.min.js"></script>
+		<script src="/financeiro/bootstrap/js/bootstrap.min.js"></script>
 	
-		<script src="/meufinanceiro/js/pessoa.js" charset="UTF-8" ></script>
+		<script src="/financeiro/js/pessoa.js" charset="UTF-8" ></script>
 	</head>
 	
 	<body>
@@ -29,7 +29,7 @@
 		  			</div>
 		  			
 		  			<div class="col-lg-12">		  				
-						<form id="formulario" action="save" method="post">
+						<form id="formulario" action="grava" method="post">
 							<div class="panel ${entity.id != null ? 'panel-success' : 'panel-info'}">
   								<div class="panel panel-heading">
   									<h3 class="panel-title">
