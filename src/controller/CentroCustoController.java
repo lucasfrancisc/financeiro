@@ -33,9 +33,9 @@ public class CentroCustoController extends GenericController<CentroCusto, Centro
 		result.include("entity", entity);
 	}
 	
-	public void save() { 
-		super.save();
-		result.redirectTo(this).listagem("");
+	public void save(CentroCusto entity) { 
+		Operacao op = entity.getId() != null ? Operacao.ALTERACAO : Operacao.INCLUSAO;
+		super.save(entity, op);
 	}
 	
 	public void listagem(String pesquisa) {

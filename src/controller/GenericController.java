@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import br.com.caelum.vraptor.Result;
 import model.dao.database.jpa.FabricaEntityManagerFactory;
 import model.dao.database.jpa.GenericDAO;
-import model.dao.database.jpa.TituloDAO;
 import model.entity.Base;
 import util.enumeration.Operacao;
 
@@ -17,7 +16,7 @@ public class GenericController <T extends Base, D extends GenericDAO<T>> {
 	private final Class<D> clazzDAO;
 	protected D dao;
 	protected final Result result;
-	private final EntityManager manager;
+	protected final EntityManager manager;
 	
 	@SuppressWarnings("unchecked")
 	public GenericController(Result result) {
@@ -45,29 +44,26 @@ public class GenericController <T extends Base, D extends GenericDAO<T>> {
 		result.include("entity", entity);
 	}
 	
- 	public void save() {
-	  try {
-		  T entity = null;
-		  try {
-		      entity = clazz.newInstance();
-		      entity.setOperacao(Operacao.INCLUSAO);
-		  } catch(Exception e) {
-			  throw new RuntimeException(e);
-		  }
-		
-		  this.manager.getTransaction().begin();
-		
-		  if (entity.getOperacao().equals(Operacao.INCLUSAO)) {
-			  dao.create(entity);
-			  System.out.println("Título incluido com sucesso!");
-		  } else if (entity.getOperacao().equals(Operacao.ALTERACAO)){
-			  dao.update(entity);
-		  	  System.out.println("Título alterado com sucesso!");
-		  }
-	  	  this.manager.getTransaction().commit();
-	  } catch(Exception e) {
-		  this.manager.getTransaction().rollback();
-	  }
-    }
+	protected void save(T entity, Operacao op) {
+		try {
+			this.manager.getTransaction().begin();
 
+			if (Operacao.INCLUSAO.equals(op)) {
+				dao.create(entity);
+				System.out.println("Registro incluido com sucesso!");
+			} else if (Operacao.ALTERACAO.equals(op)) {
+				dao.update(entity);
+				System.out.println("Registro alterado com sucesso!");
+			}
+			this.manager.getTransaction().commit();
+		} catch (Exception e) {
+			this.manager.getTransaction().rollback();
+		}
+		
+		result.redirectTo(this).listagem("");
+	}
+	
+	public void listagem(String pesquisa) {
+		throw new UnsupportedOperationException("Método deve ser sobreescrito pela controller filha!");
+	}
 }

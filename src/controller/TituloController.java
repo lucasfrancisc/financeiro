@@ -5,14 +5,17 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import model.dao.database.jpa.PessoaDAO;
 import model.dao.database.jpa.TituloDAO;
 import model.entity.Titulo;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import util.FuncoesUtil;
 import util.enumeration.Operacao;
 
 @Resource
@@ -26,7 +29,9 @@ public class TituloController extends GenericController<Titulo, TituloDAO> {
 	}
 	
 	public void add() {
-		super.add();		
+		super.add();
+		PessoaDAO pDAO = new PessoaDAO(manager);
+		result.include("listaPessoas", pDAO.find(""));
 	}
 	
 	public void exibir(Long id) {
@@ -76,6 +81,7 @@ public class TituloController extends GenericController<Titulo, TituloDAO> {
 //		result.redirectTo(this).listagem("");
 //	}
 	
+	@Path("/")
 	public void listagem(String pesquisa) {
 		List<Titulo> entitys = dao.find(pesquisa);
 		result.include("entitys", entitys);

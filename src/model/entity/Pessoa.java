@@ -3,7 +3,7 @@ package model.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class Pessoa extends Base{
+public class Pessoa extends Base {
 	
 	private String nome;
 	private String documento;
