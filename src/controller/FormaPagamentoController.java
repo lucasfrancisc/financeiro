@@ -1,81 +1,39 @@
 package controller;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import model.dao.database.jpa.FabricaEntityManagerFactory;
-import model.dao.database.jpa.FormaPagamentoDAO;
 import model.entity.FormaPagamento;
-import util.FuncoesUtil;
+import model.dao.database.jpa.FormaPagamentoDAO;
 import util.enumeration.Operacao;
 
 @Resource
-public class FormaPagamentoController {
-
-	private final Result result;
-	private final EntityManager manager;
-	private final FormaPagamentoDAO dao;	
+public class FormaPagamentoController extends GenericController<FormaPagamento, FormaPagamentoDAO> implements GenericInterfaceController<FormaPagamento>{
 	
 	public FormaPagamentoController(Result result) {
-		this.result = result;	
-		this.manager = FabricaEntityManagerFactory.getEntityManagerFactory().createEntityManager();
-		dao = new FormaPagamentoDAO(manager);		
-	}	
-	
-	@Get("/formaPagamento")
-	public void cadastro(){
-	
-	}
-
-	
-	@Get("/formaPagamento/listagem")
-	public void listagem() {
-		List<FormaPagamento> formas = dao.get(); 
-		result.include("formas", formas);		
+		super(result);
 	}
 	
-	@Post("/formaPagamento")
-	public void save(FormaPagamento entity) {
-		try {
-			FuncoesUtil.iniciaTransacao(manager);
-			
-			if (entity.getOperacao().equals(Operacao.INCLUSAO)) {
-				dao.create(entity);
-				System.out.println("Forma de pagamento incluída com sucesso.");
-			} else {
-				dao.update(entity);
-				System.out.println("Forma de pagamento alterada com sucesso.");
-			}
-			FuncoesUtil.comitaTransacao(manager);
-		} catch(Exception e) {
-			FuncoesUtil.cancelaTransacao(manager);
-		}
-		
-		result.redirectTo(this).listagem();
+	public void add() {
+		super.add();
 	}
 	
 	public void exibir(Long id) {
-		FormaPagamento entity = dao.read(id);
-		result.include("entity", entity);
+		super.exibirUpdate(id, Operacao.EXIBICAO);
+	}
+	
+	public void update(Long id) {
+		super.exibirUpdate(id, Operacao.ALTERACAO);
+	}
+	
+	public void save(FormaPagamento entity) {
+		super.save(entity);
 	}
 	
 	public void excluir(Long id) {
-		try {
-			FuncoesUtil.iniciaTransacao(manager);
-			
-			dao.delete(id);
-			
-			FuncoesUtil.comitaTransacao(manager);
-		} catch(Exception e) {
-			FuncoesUtil.cancelaTransacao(manager);
-		}
-		
-		result.redirectTo(this).listagem();
-	}	
+		super.excluir(id);
+	}
 	
+	public void listagem(String pesquisa) {
+		super.listagem(pesquisa);
+	}
 }

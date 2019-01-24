@@ -1,22 +1,35 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
- 		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap.min.css" /> 
- 		<link rel="stylesheet" href="/meufinanceiro/bootstrap/css/bootstrap-theme.min.css" />	 
-		<script src="/meufinanceiro/bootstrap/js/bootstrap.min.js"></script>	
-		<title>Cadastro de Forma de Pagamento</title>
+		<meta charset="ISO-8859-1">
+		<title>Listagem - Forma de Pagamento</title>
+		<script src="/financeiro/jquery/jquery.min.js"></script>
 	</head>
 	<body>
-		<H2>Listagem - Forma de Pagamento</H2>
-		<c:forEach items="${formas}" var="forma">
-			ID: 	  ${forma.id} <br>
-			Decrição: ${forma.descricao} <br>
-			Tipo: 	  ${forma.tipo} <br>
-			<hr><br>
-		</c:forEach>
+		
+		<form>
+			<input type="text" name="pesquisa" value="${pesquisa}">
+			<button>Pesquisar</button>
+		</form>
+		
+		<table id="lista">
+			<thead>
+				<th>Código</th>
+				<th>Descrição</th>
+				<th>Tipo</th>
+			</thead>
+			<tbody>
+				<c:forEach items="${entitys}" var="t">
+					<tr>
+						<td>${t.id}</td>
+						<td>${t.descricao}</td>
+						<td><a href="exibir?id=${t.id}">Exibir</a></td>
+						<td><a href="excluir" class="btn-excluir btn btn-sm btn-danger" formaPagamento-id="${t.descricao}">Excluir</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</body>
+	<script src="/financeiro/js/titulo-listagem.js"></script>
 </html>
