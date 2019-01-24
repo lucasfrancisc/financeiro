@@ -90,9 +90,7 @@ public class PessoaController extends GenericController<Pessoa, PessoaDAO> {
 
 	}
 	
-	public void menu() {
-		
-	}
+
 	
 	public byte[] relatorio() {
 		// 1 
