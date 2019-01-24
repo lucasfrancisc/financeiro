@@ -20,19 +20,8 @@
 						<h2>Forma de Pagamento <span class="glyphicon glyphicon-credit-card"> </span> </h2>			  										
 					</div>
 					
-<%--   	 			<jsp:include page="/financeiro/jsp/menu.jsp" />  
-					<c:import url="/financeiro/jsp/menu/menu.jsp"/>
- 					<link rel="stylesheet" href="/financeiro/jsp/menu.jsp"/> --%>
-		
-<%-- 					<div class="panel-body">
-						<div class="row">
-							<c:if test="${entity.operacao != 'CREATE'}">	
-								<div class="col-lg-3">						
-									<label>Código:</label> <br>
-									<input type="text" maxlength="6" class="form-control" maxlength="50" name="entity.id" value="${entity.id}"> <br>	
-								</div>
-							</c:if>	
-						</div>	 --%>						
+   	 			<jsp:include page="../menu/menu.jsp" />  
+					
 						
 						<div class="row">											
 							<c:if test="${entity.operacao != 'INCLUSAO'}">
